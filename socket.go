@@ -71,7 +71,7 @@ func (s *Socket) Close() (err error) {
 // AddSymbol ...
 func (s *Socket) AddSymbol(symbol string) (err error) {
 	err = s.sendSocketMessage(
-		getSocketMessage("quote_add_symbols", []interface{}{s.sessionID, symbol, getFlags()}),
+		getSocketMessage("quote_add_symbols", []interface{}{s.sessionID, symbol}),
 	)
 	return
 }
@@ -279,12 +279,6 @@ func getSocketMessage(m string, p interface{}) *SocketMessage {
 	return &SocketMessage{
 		Message: m,
 		Payload: p,
-	}
-}
-
-func getFlags() *Flags {
-	return &Flags{
-		Flags: []string{"force_permission"},
 	}
 }
 
